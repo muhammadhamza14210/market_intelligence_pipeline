@@ -8,68 +8,51 @@ import yfinance as yf
 import pandas as pd
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
+from utils.constants import TICKERS
 
-
-# --- CONFIG ---
-# Pick 5-10 tickers you find interesting. Mix of sectors = better portfolio project.
-TICKERS = ["AAPL", "MSFT", "GOOGL", "AMZN", "NVDA", "JPM", "XOM", "UNH"]
-LOOKBACK_DAYS = 30  # How far back to pull on first run
+LOOKBACK_DAYS = 30 
 OUTPUT_DIR = "data/raw/stocks"
 
 
-def extract_stock_data(tickers: list[str], days_back: int = 30) -> list[dict]:
-    """
-    Pull daily stock data for each ticker.
-    Returns a list of records (one per ticker per day).
-    """
-    end_date = datetime.now()
-    start_date = end_date - timedelta(days=days_back)
+def extract_stock_data(tickers: list[str], days_back: int = LOOKBACK_DAYS) -> list[dict]:
     all_records = []
 
     for ticker in tickers:
-        print(f"  Pulling {ticker}...")
+        print(f"\nPulling {ticker}...")
         try:
-            # yf.download gives you a DataFrame with Open, High, Low, Close, Volume
-            df = yf.download(
-                ticker,
-                start=start_date.strftime("%Y-%m-%d"),
-                end=end_date.strftime("%Y-%m-%d"),
-                progress=False,  # suppress the progress bar
-            )
+            ticker_obj = yf.Ticker(ticker)
+            df = ticker_obj.history(period=f"{days_back}d", auto_adjust=False)
+
+            print(f"{ticker} DataFrame shape: {df.shape}")
 
             if df.empty:
-                print(f"  WARNING: No data returned for {ticker}")
+                print(f"WARNING: No data returned for {ticker}")
                 continue
 
-            # Flatten MultiIndex columns if present (yfinance quirk with single ticker)
-            if isinstance(df.columns, pd.MultiIndex):
-                df.columns = df.columns.get_level_values(0)
+            df = df.reset_index()
 
-            # Convert each row to a record with metadata
-            for date, row in df.iterrows():
+            for _, row in df.iterrows():
                 record = {
-                    # --- Business data ---
                     "ticker": ticker,
-                    "date": date.strftime("%Y-%m-%d"),
+                    "date": row["Date"].strftime("%Y-%m-%d"),
                     "open": round(float(row["Open"]), 4),
                     "high": round(float(row["High"]), 4),
                     "low": round(float(row["Low"]), 4),
                     "close": round(float(row["Close"]), 4),
                     "volume": int(row["Volume"]),
-                    # --- Metadata (you'll thank yourself later) ---
                     "source": "yahoo_finance",
                     "ingested_at": datetime.utcnow().isoformat(),
                 }
                 all_records.append(record)
 
-            print(f"  ✓ {ticker}: {len(df)} days of data")
+            print(f"✓ {ticker}: {len(df)} rows extracted")
 
         except Exception as e:
-            print(f"  ERROR pulling {ticker}: {e}")
+            print(f"ERROR pulling {ticker}: {e}")
 
+    print(f"\nTotal records extracted: {len(all_records)}")
     return all_records
-
 
 def save_to_json(records: list[dict], output_dir: str) -> str:
     """
