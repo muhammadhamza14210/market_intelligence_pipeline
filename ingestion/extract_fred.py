@@ -23,7 +23,7 @@ SERIES = [
     ("T10Y2Y", "treasury_yield_spread", "daily"),      # 10Y-2Y spread (recession indicator)
     ("VIXCLS", "vix_volatility_index", "daily"),       # VIX (fear gauge)
 ]
-LOOKBACK_DAYS = 365 
+LOOKBACK_DAYS = 30
 OUTPUT_DIR = "data/raw/fred"
 
 

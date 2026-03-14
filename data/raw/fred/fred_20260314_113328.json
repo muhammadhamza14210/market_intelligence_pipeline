@@ -1,0 +1,659 @@
+[
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-12",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250327"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-13",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250339"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-14",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250345"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-15",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250350"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-16",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250355"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-17",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250360"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-18",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250365"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-19",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250370"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-20",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250375"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-21",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250380"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-22",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250385"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-23",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250389"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-24",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250394"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-25",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250398"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-26",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250403"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-27",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250407"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-02-28",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250412"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-01",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250416"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-02",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250421"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-03",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250425"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-04",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250430"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-05",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250434"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-06",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250439"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-07",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250443"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-08",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250448"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-09",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250452"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-10",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250457"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-11",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250461"
+  },
+  {
+    "series_id": "DFF",
+    "series_name": "federal_funds_rate",
+    "date": "2026-03-12",
+    "value": 3.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.250466"
+  },
+  {
+    "series_id": "UNRATE",
+    "series_name": "unemployment_rate",
+    "date": "2026-02-01",
+    "value": 4.4,
+    "frequency": "monthly",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:25.782168"
+  },
+  {
+    "series_id": "CPIAUCSL",
+    "series_name": "consumer_price_index",
+    "date": "2026-02-01",
+    "value": 327.46,
+    "frequency": "monthly",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:26.355300"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-02-12",
+    "value": 0.62,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490726"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-02-13",
+    "value": 0.64,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490737"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-02-17",
+    "value": 0.62,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490743"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-02-18",
+    "value": 0.62,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490748"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-02-19",
+    "value": 0.61,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490753"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-02-20",
+    "value": 0.6,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490758"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-02-23",
+    "value": 0.6,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490763"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-02-24",
+    "value": 0.61,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490768"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-02-25",
+    "value": 0.6,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490772"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-02-26",
+    "value": 0.6,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490777"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-02-27",
+    "value": 0.59,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490781"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-03-02",
+    "value": 0.58,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490786"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-03-03",
+    "value": 0.55,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490790"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-03-04",
+    "value": 0.55,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490795"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-03-05",
+    "value": 0.56,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490800"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-03-06",
+    "value": 0.59,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490817"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-03-09",
+    "value": 0.56,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490822"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-03-10",
+    "value": 0.58,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490826"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-03-11",
+    "value": 0.57,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490831"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-03-12",
+    "value": 0.51,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490835"
+  },
+  {
+    "series_id": "T10Y2Y",
+    "series_name": "treasury_yield_spread",
+    "date": "2026-03-13",
+    "value": 0.55,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:27.490840"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-12",
+    "value": 20.82,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105140"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-13",
+    "value": 20.6,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105153"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-16",
+    "value": 21.2,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105159"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-17",
+    "value": 20.29,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105164"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-18",
+    "value": 19.62,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105169"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-19",
+    "value": 20.23,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105174"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-20",
+    "value": 19.09,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105178"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-23",
+    "value": 21.01,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105183"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-24",
+    "value": 19.55,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105187"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-25",
+    "value": 17.93,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105192"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-26",
+    "value": 18.63,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105197"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-02-27",
+    "value": 19.86,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105201"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-03-02",
+    "value": 21.44,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105206"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-03-03",
+    "value": 23.57,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105211"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-03-04",
+    "value": 21.15,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105215"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-03-05",
+    "value": 23.75,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105220"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-03-06",
+    "value": 29.49,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105224"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-03-09",
+    "value": 25.5,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105229"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-03-10",
+    "value": 24.93,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105233"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-03-11",
+    "value": 24.23,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105238"
+  },
+  {
+    "series_id": "VIXCLS",
+    "series_name": "vix_volatility_index",
+    "date": "2026-03-12",
+    "value": 27.29,
+    "frequency": "daily",
+    "source": "fred",
+    "ingested_at": "2026-03-14T11:33:28.105243"
+  }
+]
