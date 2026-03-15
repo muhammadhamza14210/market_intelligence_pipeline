@@ -16,12 +16,12 @@ load_dotenv()
 FRED_API_KEY = os.getenv("FRED_API_KEY")
 
 SERIES = [
-    ("DFF", "federal_funds_rate", "daily"),           # Fed funds rate (daily)
-    ("UNRATE", "unemployment_rate", "monthly"),        # Unemployment rate
-    ("CPIAUCSL", "consumer_price_index", "monthly"),   # CPI (inflation)
-    ("GDP", "gross_domestic_product", "quarterly"),     # GDP
-    ("T10Y2Y", "treasury_yield_spread", "daily"),      # 10Y-2Y spread (recession indicator)
-    ("VIXCLS", "vix_volatility_index", "daily"),       # VIX (fear gauge)
+    ("DFF", "federal_funds_rate", "daily"),
+    ("UNRATE", "unemployment_rate", "monthly"),
+    ("CPIAUCSL", "consumer_price_index", "monthly"),
+    ("T10Y2Y", "treasury_yield_spread", "daily"),
+    ("VIXCLS", "vix_volatility_index", "daily"),
+    ("DGS10", "10y_treasury_yield", "daily"),
 ]
 LOOKBACK_DAYS = 30
 OUTPUT_DIR = "data/raw/fred"
