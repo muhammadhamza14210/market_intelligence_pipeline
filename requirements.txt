@@ -3,3 +3,7 @@ requests==2.31.0
 pandas==3.0.1
 fredapi==0.5.2
 python-dotenv==1.0.1
+pyspark==4.1.1
+setuptools==82.0.1
+transformers==4.31.0
+torch==2.7.1

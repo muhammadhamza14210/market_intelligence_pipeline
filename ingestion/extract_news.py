@@ -17,15 +17,25 @@ BASE_URL = "https://gnews.io/api/v4"
 
 SEARCH_QUERIES = [
     "stock market",
-    "federal reserve interest rates",
-    "inflation report",
+    "federal reserve",
     "tech earnings",
-    "AI stocks",
-    "semiconductor demand",
-    "bank earnings",
-    "oil prices",
-    "geopolitical tensions markets",
-    "recession fears"
+    "Wall Street",
+    "S&P 500",
+    "NASDAQ",
+    "inflation economy",
+    "interest rates",
+    "Apple stock",
+    "NVIDIA stock",
+    "Tesla stock",
+    "Amazon stock",
+    "Microsoft stock",
+    "banking stocks",
+    "oil prices energy",
+    "jobs report unemployment",
+    "GDP growth",
+    "crypto bitcoin",
+    "trade tariff",
+    "IPO market",
 ]
 LOOKBACK_DAYS = 30
 OUTPUT_DIR = "data/raw/news"
