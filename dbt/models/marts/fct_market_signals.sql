@@ -6,8 +6,6 @@
   - Unusual activity flags
   - Risk indicators
   - Sentiment-price divergence detection
-
-  Each CASE statement is a business decision you can explain in interviews.
 */
 
 with daily as (
