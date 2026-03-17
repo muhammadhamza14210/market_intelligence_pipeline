@@ -134,7 +134,6 @@ def upload_all():
 
     current_container = None
     for local_dir, (container, lake_folder) in UPLOAD_MAP.items():
-        # Print header when switching layers
         if container != current_container:
             current_container = container
             print(f"\n  {'─' * 50}")

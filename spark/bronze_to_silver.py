@@ -133,10 +133,6 @@ def load_finbert():
 
 
 def analyze_sentiment(texts: list, sentiment_pipeline) -> list:
-    """
-    Run FinBERT on a batch of texts.
-    Returns list of (label, score) tuples.
-    """
     results = []
     batch_size = 32
     for i in range(0, len(texts), batch_size):
@@ -144,9 +140,18 @@ def analyze_sentiment(texts: list, sentiment_pipeline) -> list:
         batch = [t[:512] if t else "" for t in batch]
         preds = sentiment_pipeline(batch)
         for pred in preds:
-            results.append((pred["label"], round(pred["score"], 4)))
+            label = pred["label"]
+            score = round(pred["score"], 4)
+            # Convert to directional score: -1 to +1
+            # positive = +score, negative = -score, neutral = 0
+            if label == "positive":
+                directional = score
+            elif label == "negative":
+                directional = -score
+            else:
+                directional = 0.0
+            results.append((label, score, directional))
     return results
-
 
 def transform_news():
     """
@@ -188,6 +193,7 @@ def transform_news():
     # Add sentiment columns back
     pandas_df["sentiment_label"] = [s[0] for s in sentiments]
     pandas_df["sentiment_score"] = [s[1] for s in sentiments]
+    pandas_df["sentiment_directional"] = [s[2] for s in sentiments]
 
     # Convert back to Spark DataFrame
     silver = spark.createDataFrame(pandas_df)
@@ -196,7 +202,7 @@ def transform_news():
     silver = silver.select(
         "title", "description", "source_name", "url",
         "published_at", "date", "search_query",
-        "sentiment_label", "sentiment_score",
+        "sentiment_label", "sentiment_score", "sentiment_directional",
         "source", "ingested_at"
     ).orderBy("published_at")
 

@@ -1,0 +1,40 @@
+version: 2
+
+sources:
+  - name: gold
+    schema: gold
+    description: "Gold layer tables from PySpark pipeline"
+    tables:
+      - name: fct_daily_market_summary
+        description: "Daily stock prices + news sentiment + macro indicators per ticker"
+        columns:
+          - name: date
+            description: "Trading date"
+            tests:
+              - not_null
+          - name: ticker
+            description: "Stock ticker symbol"
+            tests:
+              - not_null
+          - name: close
+            description: "Closing price"
+            tests:
+              - not_null
+
+      - name: dim_tickers
+        description: "Summary statistics per ticker"
+        columns:
+          - name: ticker
+            description: "Stock ticker symbol"
+            tests:
+              - unique
+              - not_null
+
+      - name: fct_sentiment_sensitivity
+        description: "How each ticker reacts to market-wide sentiment"
+        columns:
+          - name: ticker
+            description: "Stock ticker symbol"
+            tests:
+              - unique
+              - not_null

@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: stg_daily_market
+    description: "Staged daily market data with NULL handling and consistent naming"
+    columns:
+      - name: date
+        tests:
+          - not_null
+      - name: ticker
+        tests:
+          - not_null
+      - name: close
+        tests:
+          - not_null
+      - name: sentiment_ratio
+        description: "Ranges from -1 (all negative news) to +1 (all positive). Defaults to 0 when no news data."
+        tests:
+          - not_null
+
+  - name: fct_market_signals
+    description: "Daily market data enriched with business signal classifications"
+    columns:
+      - name: market_signal
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['strong_bullish', 'bullish', 'slightly_bullish', 'neutral', 'slightly_bearish', 'bearish', 'strong_bearish']
+      - name: volume_signal
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['high_volume_spike', 'elevated_volume', 'normal_volume', 'low_volume']
+      - name: trend_position
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['well_above_trend', 'above_trend', 'at_trend', 'below_trend', 'well_below_trend']
+      - name: news_intensity
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['high_coverage', 'moderate_coverage', 'low_coverage', 'no_coverage']
+
+  - name: fct_weekly_summary
+    description: "Weekly aggregated market summary per ticker"
+    columns:
+      - name: ticker
+        tests:
+          - not_null
+      - name: week_start
+        tests:
+          - not_null

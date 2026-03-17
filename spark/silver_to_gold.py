@@ -3,7 +3,6 @@ STEP 3B: Silver → Gold Transformations
 ----------------------------------------
 Joins stocks + news sentiment + FRED macro data into a unified
 analytics-ready table. This is the Gold layer.
-
 """
 
 from pyspark.sql import SparkSession
@@ -30,11 +29,6 @@ GOLD_DIR = "data/gold"
 def build_daily_market_summary():
     """
     Build the main Gold table: fct_daily_market_summary
-
-    One row per ticker per date with:
-    - Stock price data (from silver/stocks)
-    - News sentiment aggregates (from silver/news)
-    - Macro economic indicators (from silver/fred)
     """
     print("=" * 60)
     print("  SILVER → GOLD: fct_daily_market_summary")
@@ -53,7 +47,6 @@ def build_daily_market_summary():
     print(f"  FRED:   {fred.count()} rows")
 
     # --- 2. Aggregate news by date ---
-    # Multiple articles per day → we need daily aggregates
     print("\n[2/4] Aggregating daily news sentiment...")
 
     daily_news = (
@@ -62,9 +55,34 @@ def build_daily_market_summary():
         .agg(
             # Count of articles
             F.count("*").alias("news_article_count"),
-            # Average sentiment score
-            F.round(F.avg("sentiment_score"), 4).alias("avg_sentiment_score"),
-            # Count by sentiment type
+
+            # === THE KEY SENTIMENT METRICS ===
+
+            # Sentiment ratio: (positive - negative) / total
+            # Ranges from -1.0 (all negative) to +1.0 (all positive)
+            # THIS is the metric that varies meaningfully per day
+            F.round(
+                (F.sum(F.when(F.col("sentiment_label") == "positive", 1).otherwise(0))
+                 - F.sum(F.when(F.col("sentiment_label") == "negative", 1).otherwise(0)))
+                / F.count("*"),
+                4
+            ).alias("sentiment_ratio"),
+
+            # Average positive headline strength (how confident the good news is)
+            F.round(
+                F.avg(
+                    F.when(F.col("sentiment_label") == "positive", F.col("sentiment_score"))
+                ), 4
+            ).alias("avg_positive_strength"),
+
+            # Average negative headline strength
+            F.round(
+                F.avg(
+                    F.when(F.col("sentiment_label") == "negative", F.col("sentiment_score"))
+                ), 4
+            ).alias("avg_negative_strength"),
+
+            # Counts by label
             F.sum(
                 F.when(F.col("sentiment_label") == "positive", 1).otherwise(0)
             ).alias("positive_news_count"),
@@ -74,42 +92,36 @@ def build_daily_market_summary():
             F.sum(
                 F.when(F.col("sentiment_label") == "neutral", 1).otherwise(0)
             ).alias("neutral_news_count"),
-            # Sentiment ratio: positive / total (higher = more bullish news)
-            F.round(
-                F.sum(F.when(F.col("sentiment_label") == "positive", 1).otherwise(0))
-                / F.count("*"),
-                4
-            ).alias("positive_sentiment_ratio"),
+
             # Collect top headlines (for LLM summary later)
             F.collect_list("title").alias("headlines"),
         )
     )
 
-    daily_news.show(5, truncate=False)
+    print("  Daily sentiment summary:")
+    daily_news.select(
+        "date", "news_article_count", "sentiment_ratio",
+        "positive_news_count", "negative_news_count", "neutral_news_count"
+    ).orderBy("date").show(10, truncate=False)
 
     # --- 3. Join everything on date ---
     print("[3/4] Joining stocks + news + FRED on date...")
 
-    # Start with stocks (our fact grain: one row per ticker per day)
     gold = (
         stocks
-        # Left join daily news aggregates
         .join(daily_news, on="date", how="left")
-        # Left join FRED macro indicators
         .join(fred, on="date", how="left")
     )
 
     # --- 4. Add derived features ---
     print("[4/4] Adding derived features...")
 
-    # Window for rolling calculations per ticker
     ticker_window = (
         Window
         .partitionBy("ticker")
         .orderBy("date")
     )
 
-    # Rolling 7-day window
     rolling_7d = (
         Window
         .partitionBy("ticker")
@@ -119,12 +131,10 @@ def build_daily_market_summary():
 
     gold = (
         gold
-        # Previous day close (for calculating overnight gaps)
         .withColumn(
             "prev_close",
             F.lag("close", 1).over(ticker_window)
         )
-        # Overnight gap: (today's open - yesterday's close) / yesterday's close
         .withColumn(
             "overnight_gap_pct",
             F.round(
@@ -132,22 +142,14 @@ def build_daily_market_summary():
                 4
             )
         )
-        # 7-day rolling average close
         .withColumn(
             "rolling_7d_avg_close",
             F.round(F.avg("close").over(rolling_7d), 4)
         )
-        # 7-day rolling average volume
         .withColumn(
             "rolling_7d_avg_volume",
             F.round(F.avg("volume").over(rolling_7d), 0).cast("long")
         )
-        # 7-day rolling average sentiment
-        .withColumn(
-            "rolling_7d_avg_sentiment",
-            F.round(F.avg("avg_sentiment_score").over(rolling_7d), 4)
-        )
-        # Price vs rolling average (is it trading above or below trend?)
         .withColumn(
             "price_vs_7d_avg_pct",
             F.round(
@@ -156,7 +158,6 @@ def build_daily_market_summary():
                 4
             )
         )
-        # Volume spike: today's volume vs 7-day average
         .withColumn(
             "volume_spike_ratio",
             F.round(
@@ -164,9 +165,7 @@ def build_daily_market_summary():
                 4
             )
         )
-        # Drop helper column
         .drop("prev_close", "headlines")
-        # Final ordering
         .orderBy("date", "ticker")
     )
 
@@ -181,17 +180,13 @@ def build_daily_market_summary():
     print(f"  Total rows:    {gold.count()}")
     print(f"  Columns:       {len(gold.columns)}")
     print(f"  Date range:    {gold.agg(F.min('date'), F.max('date')).collect()[0]}")
-    print(f"  Tickers:       {[r.ticker for r in gold.select('ticker').distinct().collect()]}")
-    print(f"\n  Column list:")
-    for col in gold.columns:
-        print(f"    - {col}")
 
-    print(f"\n  Sample data:")
-    gold.select(
+    print(f"\n  Sample data (days with sentiment):")
+    gold.filter(F.col("sentiment_ratio").isNotNull()).select(
         "date", "ticker", "close", "daily_return",
-        "news_article_count", "avg_sentiment_score",
-        "rolling_7d_avg_close", "volume_spike_ratio"
-    ).show(10, truncate=False)
+        "news_article_count", "sentiment_ratio",
+        "positive_news_count", "negative_news_count"
+    ).filter(F.col("ticker") == "AAPL").orderBy("date").show(10, truncate=False)
 
     print(f"\n  ✓ Written to {output_path}")
     return gold
@@ -200,8 +195,6 @@ def build_daily_market_summary():
 def build_dim_tickers(stocks_gold):
     """
     Build a dimension table for tickers.
-    Summary stats per ticker — no avg_sentiment since it's market-wide
-    and would be identical for every ticker.
     """
     print(f"\n{'=' * 60}")
     print(f"  GOLD TABLE: dim_tickers")
@@ -218,9 +211,8 @@ def build_dim_tickers(stocks_gold):
             F.min("date").alias("first_date"),
             F.max("date").alias("last_date"),
             F.count("*").alias("trading_days"),
-            # Count days with sentiment data available
             F.sum(
-                F.when(F.col("avg_sentiment_score").isNotNull(), 1).otherwise(0)
+                F.when(F.col("sentiment_ratio").isNotNull(), 1).otherwise(0)
             ).alias("days_with_sentiment"),
         )
         .orderBy("ticker")
@@ -231,19 +223,15 @@ def build_dim_tickers(stocks_gold):
 
     dim.show(truncate=False)
     print(f"  ✓ Written to {output_path}")
-
     return dim
 
 
 def build_sentiment_sensitivity(stocks_gold):
     """
     Build a sentiment sensitivity table.
-    Shows how each ticker reacts to market-wide sentiment.
-
-    Same sentiment day, different stock reactions = the insight.
-    A ticker with high sensitivity swings more on sentiment shifts.
-
-    Only uses days where sentiment data is available.
+    Uses sentiment_ratio (-1 to +1) to bucket days as
+    positive, negative, or neutral news days.
+    Then compares how each ticker performed on each type of day.
     """
     print(f"\n{'=' * 60}")
     print(f"  GOLD TABLE: fct_sentiment_sensitivity")
@@ -251,67 +239,83 @@ def build_sentiment_sensitivity(stocks_gold):
 
     # Filter to only days with sentiment data
     with_sentiment = stocks_gold.filter(
-        F.col("avg_sentiment_score").isNotNull()
+        F.col("sentiment_ratio").isNotNull()
     )
 
-    # Classify sentiment days
+    # Classify days using sentiment_ratio
+    # ratio > 0 = more positive than negative headlines
+    # ratio < 0 = more negative than positive headlines
     classified = with_sentiment.withColumn(
-        "sentiment_bucket",
-        F.when(F.col("avg_sentiment_score") >= 0.85, "high_positive")
-        .when(F.col("avg_sentiment_score") >= 0.70, "moderate_positive")
-        .when(F.col("avg_sentiment_score") >= 0.50, "neutral")
-        .otherwise("negative")
+        "sentiment_day_type",
+        F.when(F.col("sentiment_ratio") > 0, "bullish_news_day")
+        .when(F.col("sentiment_ratio") < 0, "bearish_news_day")
+        .otherwise("mixed_news_day")
     )
 
-    # Per ticker: avg return on positive vs negative sentiment days
+    # Show the day classification
+    print("  Day classification:")
+    classified.select("date", "sentiment_ratio", "sentiment_day_type").distinct().orderBy("date").show(10)
+
+    # Per ticker: compare returns on bullish vs bearish news days
     sensitivity = (
         classified
         .groupBy("ticker")
         .agg(
-            # Average return on high positive sentiment days
+            # Average return on bullish news days
             F.round(
                 F.avg(
-                    F.when(F.col("sentiment_bucket") == "high_positive", F.col("daily_return"))
+                    F.when(F.col("sentiment_day_type") == "bullish_news_day", F.col("daily_return"))
                 ), 4
-            ).alias("avg_return_high_sentiment"),
-            # Average return on moderate/low sentiment days
+            ).alias("avg_return_bullish_news"),
+            # Average return on bearish news days
             F.round(
                 F.avg(
-                    F.when(F.col("sentiment_bucket") != "high_positive", F.col("daily_return"))
+                    F.when(F.col("sentiment_day_type") == "bearish_news_day", F.col("daily_return"))
                 ), 4
-            ).alias("avg_return_low_sentiment"),
-            # How many sentiment days we have
+            ).alias("avg_return_bearish_news"),
+            # Average return on mixed days
+            F.round(
+                F.avg(
+                    F.when(F.col("sentiment_day_type") == "mixed_news_day", F.col("daily_return"))
+                ), 4
+            ).alias("avg_return_mixed_news"),
+            # Total sentiment days
             F.count("*").alias("sentiment_days"),
-            # Average absolute daily return (measures overall reactivity)
+            # Count by day type
+            F.sum(
+                F.when(F.col("sentiment_day_type") == "bullish_news_day", 1).otherwise(0)
+            ).alias("bullish_day_count"),
+            F.sum(
+                F.when(F.col("sentiment_day_type") == "bearish_news_day", 1).otherwise(0)
+            ).alias("bearish_day_count"),
+            # Reactivity: average absolute return (higher = more volatile)
             F.round(F.avg(F.abs(F.col("daily_return"))), 4).alias("avg_abs_return"),
-            # Correlation hint: avg return * avg sentiment (positive = moves with sentiment)
-            F.round(F.avg(F.col("daily_return")), 4).alias("avg_return_on_sentiment_days"),
-            # Max drop and max gain on sentiment days
+            # Extremes
             F.round(F.min("daily_return"), 4).alias("worst_day"),
             F.round(F.max("daily_return"), 4).alias("best_day"),
         )
-        # Sensitivity score: difference between high and low sentiment day returns
+        # Sensitivity: how much more does it return on bullish vs bearish days
         .withColumn(
             "sentiment_sensitivity",
             F.round(
-                F.col("avg_return_high_sentiment") - F.col("avg_return_low_sentiment"),
+                F.coalesce(F.col("avg_return_bullish_news"), F.lit(0))
+                - F.coalesce(F.col("avg_return_bearish_news"), F.lit(0)),
                 4
             )
         )
-        .orderBy(F.col("avg_abs_return").desc())
+        .orderBy(F.col("sentiment_sensitivity").desc())
     )
 
     output_path = f"{GOLD_DIR}/fct_sentiment_sensitivity"
     sensitivity.write.mode("overwrite").parquet(output_path)
 
     print(f"  Records: {sensitivity.count()}")
-    print(f"\n  Most reactive tickers to sentiment:")
+    print(f"\n  Ticker reaction to news sentiment:")
     sensitivity.select(
-        "ticker", "avg_return_high_sentiment", "avg_return_low_sentiment",
+        "ticker", "avg_return_bullish_news", "avg_return_bearish_news",
         "sentiment_sensitivity", "avg_abs_return", "worst_day", "best_day"
     ).show(20, truncate=False)
     print(f"  ✓ Written to {output_path}")
-
     return sensitivity
 
 
@@ -325,13 +329,8 @@ if __name__ == "__main__":
 
     os.makedirs(GOLD_DIR, exist_ok=True)
 
-    # Build fact table
     gold = build_daily_market_summary()
-
-    # Build dimension table
     dim = build_dim_tickers(gold)
-
-    # Build sentiment sensitivity analysis
     sensitivity = build_sentiment_sensitivity(gold)
 
     print(f"\n{'=' * 60}")
@@ -341,8 +340,4 @@ if __name__ == "__main__":
     print(f"    ├── fct_daily_market_summary/     (one row per ticker per day)")
     print(f"    ├── dim_tickers/                  (summary stats per ticker)")
     print(f"    └── fct_sentiment_sensitivity/    (how tickers react to sentiment)")
-    print(f"\n  Your data journey:")
-    print(f"    APIs → Bronze (raw JSON) → Silver (clean Parquet) → Gold (joined + features)")
-    print(f"\n  Next: Step 4 - dbt models on the Gold layer")
-
     spark.stop()

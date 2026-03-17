@@ -1,0 +1,7 @@
+market_intelligence:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "../data/market_intelligence.duckdb"
+      schema: analytics
