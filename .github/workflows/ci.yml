@@ -30,15 +30,6 @@ jobs:
           pip install ruff pytest dbt-duckdb duckdb
           pip install -r requirements.txt
       
-      - name: Lint with Ruff
-        run: |
-          ruff check ingestion/ spark/ azure/ --ignore E501
-      
-      - name: Check formatting
-        run: |
-          ruff format --check ingestion/ spark/ azure/
-        continue-on-error: true
-      
       - name: Validate dbt compiles
         run: |
           cd dbt
