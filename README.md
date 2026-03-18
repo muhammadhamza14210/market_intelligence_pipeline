@@ -10,7 +10,7 @@ An end-to-end data engineering platform that ingests financial data from multipl
 
 This pipeline pulls stock prices, financial news, and macroeconomic indicators daily, transforms them through a medallion architecture (Bronze → Silver → Gold), applies FinBERT sentiment analysis to news headlines, and serves the results through an interactive dashboard with an Azure OpenAI chatbot that can answer natural language questions about the data.
 
-**Key insight it produces:** For each trading day, the system identifies whether news sentiment was bullish or bearish, measures how each stock reacted, and flags divergence events where price movement contradicted the market mood — a signal that professional traders watch closely.
+**Key insight it produces:** For each trading day, the system identifies whether news sentiment was bullish or bearish, measures how each stock reacted, and flags divergence events where price movement contradicted the market mood a signal that professional traders watch closely.
 
 ---
 
