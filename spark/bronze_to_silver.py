@@ -12,10 +12,7 @@ What this does:
 
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
-from pyspark.sql.types import (
-    StructType, StructField, StringType, DoubleType,
-    LongType, TimestampType, FloatType
-)
+from pyspark.sql.types import (DoubleType, LongType)
 from pyspark.sql import Window
 from transformers import pipeline
 import os

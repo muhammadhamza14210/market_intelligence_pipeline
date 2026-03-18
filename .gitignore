@@ -1,5 +1,35 @@
-.venv/
+# Python
 __pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# Environment
 .env
-dbt/target/
+
+# Data
+data/
+*.parquet
+*.duckdb
+
+# dbt
 dbt/dbt_packages/
+dbt/target/
+dbt/logs/
+
+# Airflow
+airflow.db
+airflow.cfg
+webserver_config.py
+
+# Docker
+postgres_data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
