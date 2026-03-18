@@ -2,8 +2,10 @@
 
 An end-to-end data engineering platform that ingests financial data from multiple sources, enriches it with NLP-powered sentiment analysis, and serves actionable market insights through an AI-powered dashboard.
 
-![Architecture](architecture_diagram.png)
-
+![Dashboard](assets/dashboard.png)
+![Ticker Analysis](assets/ticker.png)
+![Ticker Sentiment](assets/sentiment.png)
+![Chatbot](assets/chatbot.png)
 ---
 
 ## What This Project Does
